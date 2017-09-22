@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <form>
+        <div class="form-group">
+          <h1>Patient Details</h1>
+          <select class="form-control" #patientList name="patients" (change)="displayPatientDetails(patientList.value)">
+            <option value="-1">Please select your patient...</option>
+            <option *ngFor="let patient of patients$ | async;" [value]="patient.id">
+              {{ patient.name }}
+            </option>
+          </select>
+        </div>
+      </form>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row" *ngIf="isPatientSelected">
+        <div class="col-md-4">
+          <img src="../../../assets/images/generics/person-placeholder.jpg" class="align-bottom form-control" alt="headshot">
+        </div>
+        <div class="col-md-8">
+          {{ selectedPatient.name }} <br />
+          Age: {{ selectedPatient.age }} <br />
+          Gender: {{ selectedPatient.gender }} <br />
+          Notes: {{ selectedPatient.notes }} <br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row"  *ngIf="isPatientSelected">
+    <div class="col-md-6">
+      <h1>Behaviour Details</h1>
+      <select class="form-control" #patientList name="patients" (change)="displayPatientDetails(patientList.value)">
+        <option value="-1">Please select a behaviour type...</option>
+        <option *ngFor="let patient of patients$ | async;" [value]="patient.id">
+          {{ patient.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Please Select Appropriate Details</h3>
+    </div>
+  </div>
+
+</div>
