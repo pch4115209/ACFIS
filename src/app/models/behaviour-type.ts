@@ -1,13 +1,20 @@
 /**
  * Created by PPan on 22/09/2017.
  */
-export interface BehaviourType{
-    code:string;
-    brief:string;
-    details:BehaviourDescription[]
+export interface BehaviourSummary{
+    id:number;
+    name:string;
 }
 
-export interface BehaviourDescription{
+export interface Behaviour{
+    summary: string;
+    type:string;
+    code:string
+}
+
+
+
+export interface BehaviourDetails{
     code:string;
-    details:string;
+    details:string[]
 }

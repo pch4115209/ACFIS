@@ -1,7 +1,7 @@
 /**
  * Created by PPan on 21/09/2017.
  */
-import  { BehaviourType } from './behaviour-type';
+import  { Behaviour } from './behaviour-type';
 
 export interface Address{
     streetNumber:number;
@@ -21,7 +21,7 @@ export class Patient{
         public gender?:string,
         public notes?:string,
         public address?:Address,
-        public behaviour_types?:BehaviourType[],
+        public behaviours?:any[],
     ){}
 }
 

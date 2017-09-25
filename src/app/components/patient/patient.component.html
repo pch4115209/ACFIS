@@ -34,16 +34,44 @@
   <div class="row"  *ngIf="isPatientSelected">
     <div class="col-md-6">
       <h1>Behaviour Details</h1>
-      <select class="form-control" #patientList name="patients" (change)="displayPatientDetails(patientList.value)">
+      <select class="form-control" #behaviourList name="behaviours" (change)="displayBehaviourTypes(behaviourList.value)">
         <option value="-1">Please select a behaviour type...</option>
-        <option *ngFor="let patient of patients$ | async;" [value]="patient.id">
-          {{ patient.name }}
+        <option *ngFor="let behaviourSummary of behaviourSummaries;" [value]="behaviourSummary.name">
+          {{ behaviourSummary.name }}
         </option>
       </select>
+      <br />
+      <form *ngIf="isBehaviourTypeSelected">
+        <div *ngFor="let behaviour of behaviours;">
+          <div class="form-group" *ngIf="behaviour.summary === behaviourList.value">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" #behaviourTypeRatio class="form-check-input" name="behaviourType" (change)="displayBehaviourDetails(behaviourTypeRatio.value)" [value]="behaviour.code">
+                {{ behaviour.code }} - {{ behaviour.type }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
 
     <div class="col-md-6">
       <h3>Please Select Appropriate Details</h3>
+      <br>
+      <form *ngIf="isBehaviourCodeSelected">
+        <div *ngFor="let behaviourDetail of behaviourDetails;">
+          <div *ngIf="behaviourDetail.code === selectedBehaviourCode">
+            <div class="form-group" *ngFor="let behaviourDescription of behaviourDetail.details;">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="radio" #behaviourDetailInfo class="form-check-input" name="behaviourDetailInfo" [value]="behaviourDescription">
+                  {{ behaviourDetail.code }} - {{ behaviourDescription }}
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
