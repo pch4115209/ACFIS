@@ -15,13 +15,15 @@ import { DummyBehaviour, DummyBehaviourDetails, DummyBehaviourSummary } from '..
 export class PatientComponent implements OnInit {
   patients$: Observable<Patient[]>;
   isPatientSelected:boolean = false;
-  selectedPatient:Patient;
-  behaviourSummaries:BehaviourSummary[];
-  behaviours:Behaviour[];
-  behaviourDetails:BehaviourDetails[];
+  selectedPatient:Patient; // Selected patient
+  behaviourSummaries:BehaviourSummary[]; // dummy data
+  behaviours:Behaviour[];                //dummy data
+  behaviourDetails:BehaviourDetails[];   //dummy data
   isBehaviourTypeSelected:boolean = false;
   isBehaviourCodeSelected:boolean = false;
+  selectedBehaviourType:number | string;
   selectedBehaviourCode:string;
+  selectedBehaviourDetailInfo:string;
 
   constructor(private _dataService:DataService) {
     this.behaviourSummaries = DummyBehaviourSummary;
@@ -37,15 +39,29 @@ export class PatientComponent implements OnInit {
   displayPatientDetails(patientID: number | string){
     this._dataService.getPatient(patientID).subscribe( patient => this.selectedPatient = patient );
     this.isPatientSelected = true;
+    this.isBehaviourTypeSelected = false;
+    this.isBehaviourCodeSelected = false;
+    this.selectedBehaviourType = -1;//reset the behaviour details
 
   }
 
-  displayBehaviourTypes(behaviourType: number | string){
+  displayBehaviourTypes(){
     this.isBehaviourTypeSelected = true;
+
+    if( this.selectedBehaviourType == -1 ){ // if behaviour is deslected, reset behaviour selection
+      this.resetBehaviourSelection();
+    }
   }
 
-  displayBehaviourDetails(behaviourCode:string){
-      this.selectedBehaviourCode = behaviourCode;
+  displayBehaviourDetails(){
       this.isBehaviourCodeSelected = true;
   }
+
+  private resetBehaviourSelection(){
+    this.selectedBehaviourCode = '';
+    this.selectedBehaviourDetailInfo = '';
+    this.isBehaviourTypeSelected = false;
+    this.isBehaviourCodeSelected = false;
+  }
+
 }

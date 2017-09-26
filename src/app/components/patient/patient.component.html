@@ -1,3 +1,4 @@
+<app-top-nav></app-top-nav>
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-6">
@@ -34,7 +35,7 @@
   <div class="row"  *ngIf="isPatientSelected">
     <div class="col-md-6">
       <h1>Behaviour Details</h1>
-      <select class="form-control" #behaviourList name="behaviours" (change)="displayBehaviourTypes(behaviourList.value)">
+      <select class="form-control" [(ngModel)]="selectedBehaviourType" name="behaviours" (change)="displayBehaviourTypes()">
         <option value="-1">Please select a behaviour type...</option>
         <option *ngFor="let behaviourSummary of behaviourSummaries;" [value]="behaviourSummary.name">
           {{ behaviourSummary.name }}
@@ -43,10 +44,10 @@
       <br />
       <form *ngIf="isBehaviourTypeSelected">
         <div *ngFor="let behaviour of behaviours;">
-          <div class="form-group" *ngIf="behaviour.summary === behaviourList.value">
+          <div class="form-group" *ngIf="behaviour.summary === selectedBehaviourType">
             <div class="form-check">
               <label class="form-check-label">
-                <input type="radio" #behaviourTypeRatio class="form-check-input" name="behaviourType" (change)="displayBehaviourDetails(behaviourTypeRatio.value)" [value]="behaviour.code">
+                <input type="radio" [(ngModel)]="selectedBehaviourCode" class="form-check-input" name="behaviourType" (change)="displayBehaviourDetails()" [value]="behaviour.code">
                 {{ behaviour.code }} - {{ behaviour.type }}
               </label>
             </div>
@@ -64,7 +65,7 @@
             <div class="form-group" *ngFor="let behaviourDescription of behaviourDetail.details;">
               <div class="form-check">
                 <label class="form-check-label">
-                  <input type="radio" #behaviourDetailInfo class="form-check-input" name="behaviourDetailInfo" [value]="behaviourDescription">
+                  <input type="radio" [(ngModel)]="selectedBehaviourDetailInfo" class="form-check-input" name="behaviourDetailInfo" [value]="behaviourDescription">
                     {{ behaviourDetail.code }} - <span [innerHTML]="behaviourDescription"></span>
                 </label>
               </div>

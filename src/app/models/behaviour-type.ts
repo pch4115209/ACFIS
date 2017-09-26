@@ -7,7 +7,7 @@ export interface BehaviourSummary{
 }
 
 export interface Behaviour{
-    summary: string;
+    summary: number | string;
     type:string;
     code:string
 }
