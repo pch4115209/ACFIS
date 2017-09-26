@@ -65,7 +65,7 @@
               <div class="form-check">
                 <label class="form-check-label">
                   <input type="radio" #behaviourDetailInfo class="form-check-input" name="behaviourDetailInfo" [value]="behaviourDescription">
-                  {{ behaviourDetail.code }} - {{ behaviourDescription }}
+                    {{ behaviourDetail.code }} - <span [innerHTML]="behaviourDescription"></span>
                 </label>
               </div>
             </div>
