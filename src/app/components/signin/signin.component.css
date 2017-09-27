@@ -1,31 +1,33 @@
-body{
-    color: #fff !important;
-}
-
 #login-page, #login-page-row, #login-section, bg-image-section{
     height: 100%;
 }
 
 #login-page{
+    color: #ffffff;
     position: absolute;
     margin-top: -70px;
     width: 100%;
-}
-
-#bg-image-section {
     background:
             linear-gradient(
                     rgba(45, 45, 45, 0.45 ),
                     rgba(45, 45, 45, 0.45 )
-                ), url('../../../assets/images/generics/depositphotos_32902589-stock-photo-taking-care-of-patient.jpg');
+            ), url('../../../assets/images/generics/depositphotos_32902589-stock-photo-taking-care-of-patient.jpg');
     background-size: cover;
     background-position: center;
     background-repeat:no-repeat;
+}
 
+#bg-image-section {
 }
 
 
 #login-section{
-    background-color: #222;
+    background-color: rgba(0,0,0, 0.8);
     border: black;
+    overflow: auto;
+}
+
+.container-login{
+    padding-top:35%;
+    padding-bottom: 10%;
 }
