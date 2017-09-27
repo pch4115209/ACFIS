@@ -8,6 +8,7 @@ import { UserComponent } from './components/user/user.component';
 import { RouterModule, Routes } from '@angular/router';
 
 import {DataService} from './services/data.service';
+import { AuthenticateService } from './services/authenticate.service';
 import { AboutComponent } from './components/about/about.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { SigninComponent } from './components/signin/signin.component';
@@ -38,7 +39,10 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [DataService],
+  providers: [
+    DataService,
+    AuthenticateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
