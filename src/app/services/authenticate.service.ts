@@ -1,28 +1,58 @@
 import { Injectable } from '@angular/core';
 import {Router} from "@angular/router";
-
-const logins = [
-                { username:'admin', password:'admin', firstname:'John', lastname:'Smith' },
-                { username:'staff', password:'staff', firstname:'Dave', lastname:'Lee'   }
-              ];
+import { Users } from '../dummy-users';
+import {Observable} from "rxjs/Observable";
+import {observable} from "rxjs/symbol/observable";
 
 @Injectable()
 export class AuthenticateService {
-  private router:Router;
+  users$:any = Observable.of(Users);
+  isValidLogin:boolean = false;
 
-  constructor() {
+  constructor(private router:Router) {}
 
+  getUsers(){
+    return this.users$;
   }
 
   login( credential:any ){
-    if( credential.username === login.username && credential.password === login.password){
+    this.getUsers().subscribe( users  => {
+      for( let i = 0; i < users.length; i++ ){
+        if (users[i].username === credential.username && users[i].password === credential.password) {
+          this.isValidLogin = true;
+          localStorage.setItem('currentUser', JSON.stringify(users[i]));
+          break;
+        }
+      }
+    });
 
+    if( this.isValidLogin ){
+      this.router.navigate(['/record-behaviour']);
+      return true;
+    }else{
+     return false;
     }
   }
 
   logout(){
-
+    localStorage.removeItem('currentUser');
+    this.isValidLogin = false;
+    this.router.navigate(['/signin']);
   }
 
+  authCheck(){
+    if ( localStorage.getItem("currentUser") === null ){
+      this.router.navigate(['/signin']);
+    }else{
+      this.router.navigate(['/record-behaviour']);
+    }
+  }
 
+  getCurrentUser(){
+    if ( localStorage.getItem("currentUser") === null ){
+     return false;
+    }else{
+      return JSON.parse(localStorage.getItem("currentUser"));
+    }
+  }
 }

@@ -15,13 +15,13 @@ import { SigninComponent } from './components/signin/signin.component';
 import { TopNavComponent } from './components/top-nav/top-nav.component';
 
 const appRoutes: Routes = [
-  {path:'', component:AboutComponent},
+  {path:'', redirectTo:'/signin', pathMatch: 'full'},
   {path:'signin', component:SigninComponent},
   {path:'record-behaviour', component:PatientComponent},
   {path:'patients', component:UserComponent},
   {path:'user', component:UserComponent},
   {path:'about', component:AboutComponent},
-  {path:'**', redirectTo:'', pathMatch: 'full'}
+  {path:'**', redirectTo:'/signin'},
 ];
 
 @NgModule({

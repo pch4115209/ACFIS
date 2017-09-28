@@ -30,10 +30,10 @@
     </form>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, User 1</a>
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Welcome, <span>{{ currentUser.firstname }}</span></a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" href="#">Profile</a>
-          <a class="dropdown-item" href="#">Log Out</a>
+          <a class="dropdown-item" (click)="logout()">Log Out</a>
         </div>
       </li>
     </ul>

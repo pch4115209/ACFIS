@@ -5,6 +5,7 @@ import {Patient} from "../../models/patient";
 import {Observable} from "rxjs/Observable";
 import { BehaviourSummary, Behaviour, BehaviourDetails } from '../../models/behaviour-type';
 import { DummyBehaviour, DummyBehaviourDetails, DummyBehaviourSummary } from '../../dummy-behaviour-types';
+import {AuthenticateService} from "../../services/authenticate.service";
 
 @Component({
   selector: 'app-patient',
@@ -25,7 +26,8 @@ export class PatientComponent implements OnInit {
   selectedBehaviourCode:string;
   selectedBehaviourDetailInfo:string;
 
-  constructor(private _dataService:DataService) {
+  constructor(private _dataService:DataService, private authService:AuthenticateService) {
+    this.authService.authCheck();
     this.behaviourSummaries = DummyBehaviourSummary;
     this.behaviours = DummyBehaviour;
     this.behaviourDetails = DummyBehaviourDetails;
@@ -33,7 +35,7 @@ export class PatientComponent implements OnInit {
   }
 
   ngOnInit() {
-    return this.patients$ = this._dataService.getPatients();
+    this.patients$ = this._dataService.getPatients();
   }
 
   displayPatientDetails(patientID: number | string){
@@ -48,7 +50,7 @@ export class PatientComponent implements OnInit {
   displayBehaviourTypes(){
     this.isBehaviourTypeSelected = true;
 
-    if( this.selectedBehaviourType == -1 ){ // if behaviour is deslected, reset behaviour selection
+    if( this.selectedBehaviourType == -1 ){ // if behaviour is deleted, reset behaviour selection
       this.resetBehaviourSelection();
     }
   }
