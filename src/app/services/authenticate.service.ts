@@ -43,8 +43,6 @@ export class AuthenticateService {
   authCheck(){
     if ( localStorage.getItem("currentUser") === null ){
       this.router.navigate(['/signin']);
-    }else{
-      this.router.navigate(['/record-behaviour']);
     }
   }
 

@@ -13,14 +13,29 @@ export interface Address{
     country:string
 }
 
+export interface NOK{
+    name:string;
+    phone:string;
+    fax:string;
+}
+
+export interface AdmissionInfo{
+    room: string;
+    location:string;
+    dateOfAdmission:string;
+}
+
 export class Patient{
     constructor(
         public id:number,
         public name:string,
+        public dob?:string,
         public age?:number,
         public gender?:string,
         public notes?:string,
+        public admissionInfo?:AdmissionInfo,
         public address?:Address,
+        public nok?:NOK[],
         public behaviours?:any[],
     ){}
 }

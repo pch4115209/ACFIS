@@ -1,7 +1,7 @@
 <app-top-nav></app-top-nav>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-3">
       <form>
         <div class="form-group">
           <h1>Patient Details</h1>
@@ -15,16 +15,45 @@
       </form>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-9">
       <div class="row" *ngIf="isPatientSelected">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <img src="../../../assets/images/generics/person-placeholder.jpg" class="align-bottom form-control" alt="headshot">
         </div>
-        <div class="col-md-8">
-          {{ selectedPatient.name }} <br />
-          Age: {{ selectedPatient.age }} <br />
-          Gender: {{ selectedPatient.gender }} <br />
-          Notes: {{ selectedPatient.notes }} <br />
+        <div class="col-md-9">
+            <h2>{{ selectedPatient.name }} <h6 style="display: inline-block;">({{  selectedPatient.age }} year-old)</h6> </h2> <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <i class="fa fa-calendar-check-o"></i> DOB: <strong>{{ selectedPatient.dob }}</strong>  <br />
+                    <i class="fa fa-transgender"></i> Gender: <strong>{{ selectedPatient.gender }}</strong> <br />
+                    <div class="row" *ngIf="selectedPatient.nok.length > 0">
+                        <div class="col-md-12" *ngFor="let nok of selectedPatient.nok; let i =index;">
+                            <div class="row">
+                                <div class="col-md-4"><i class="fa fa-address-book-o"></i> NOK {{ i+1 }}: <i><strong>{{ nok.name }}</strong></i></div>
+                                <div class="col-md-4"><i class="fa fa-phone"></i> {{ nok.phone }}</div>
+                                <div class="col-md-4"><i class="fa fa-fax"></i> {{ nok.fax }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fa fa-home"></i> Room: {{ selectedPatient.admissionInfo.room }}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fa fa-map-marker"></i> Location: {{ selectedPatient.admissionInfo.location }}</h5>
+                </div>
+                <div class="col-md-4">
+                    <h5><i class="fa fa-calendar"></i> Admission Date: {{ selectedPatient.admissionInfo.dateOfAdmission }}</h5>
+                </div>
+          </div>
+          <br />
+        </div>
+        <div class="col-md-12">
+          <label class="control-label"> Diagnosis Details:</label>
+          <textarea class="form-control" rows="5" placeholder="Diagnosis Details">{{ selectedPatient.notes }} </textarea>
         </div>
       </div>
     </div>
@@ -33,7 +62,7 @@
   <hr>
 
   <div class="row"  *ngIf="isPatientSelected">
-    <div class="col-md-6">
+    <div class="col-md-3">
       <h1>Behaviour Details</h1>
       <select class="form-control" [(ngModel)]="selectedBehaviourType" name="behaviours" (change)="displayBehaviourTypes()">
         <option value="-1">Please select a behaviour type...</option>
@@ -56,7 +85,7 @@
       </form>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-9">
       <h3>Please Select Appropriate Details</h3>
       <br>
       <form *ngIf="isBehaviourCodeSelected">
