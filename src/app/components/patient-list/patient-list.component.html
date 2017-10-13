@@ -38,7 +38,7 @@
             <tbody>
             <tr *ngFor="let patient of patients$">
               <td>{{patient.name}}</td>
-              <td>{{patient.dob}}({{patient.age}})</td>
+              <td>{{patient.dob}}({{patient.age}} year-old)</td>
               <td>{{patient.admissionInfo.room}}</td>
               <td>{{patient.nok[0].name | uppercase}}</td>
               <td>{{patient.notes}}</td>
