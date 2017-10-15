@@ -12,9 +12,9 @@ import {Observable} from "rxjs/Observable";
 export class PatientListComponent implements OnInit {
   public patients$;//:Observable<Patient[]>;
   public filterQuery = "";
-  public rowsOnPage = 10;
-  public sortBy = "dob";
-  public sortOrder = "desc";
+  public rowsOnPage = 1;
+  public sortBy = "name";
+  public sortOrder = "asc";
 
   constructor(private _authService:AuthenticateService, private _dataService:DataService) {
     _authService.authCheck();
@@ -25,9 +25,11 @@ export class PatientListComponent implements OnInit {
     this._dataService.getPatients().subscribe( patients => {
         setTimeout(() => {
             this.patients$ = patients
-        }, 1000);
+          //console.log(this.patients$);
+        }, 500);
       }
     );
   }
+
 
 }
